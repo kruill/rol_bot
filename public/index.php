@@ -13,7 +13,9 @@ $body = json_decode(file_get_contents('php://input'));
 $chat = $body->message->chat;
 
 $client->post(URL . 'sendMessage', [
-    'chat_id' => $chat->id,
-    'text'    => rand(0, 100),
+    'json' => [
+        'chat_id' => $chat->id,
+        'text'    => rand(0, 100),
+    ],
 ]);
 
