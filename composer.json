@@ -1,0 +1,11 @@
+{
+  "name": "RollBot",
+  "type": "application",
+  "description": "RollBot",
+  "require": {
+    "ext-json": "*",
+    "ext-soap": "*",
+    "php": ">=7.2",
+    "guzzlehttp/guzzle": "^6.3"
+  }
+}
