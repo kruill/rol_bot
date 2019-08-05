@@ -12,20 +12,15 @@ define('URL', 'https://api.telegram.org/bot' . TOKEN . '/');
 $body = json_decode(file_get_contents('php://input'));
 $chat = $body->message->chat;
 
-$mentioned = null;
-if (isset($body->message->entities) && is_array($body->message->entities)) {
-    $mentioned = $body->message->entities[0]->user->first_name ?? '';
-}
-
-syslog(LOG_ERR, var_export($mentioned, true));
-syslog(LOG_ERR, print_r($body->message->entities, true));
-
 $get_damn = function (string $name) use ($client) {
     $body = $client->get('https://damn.ru/?name=' . $name . '&sex=m')->getBody();
 
     return html_entity_decode(strip_tags((string)str_get_html($body)->find('div[class=damn]')[0]));
 };
-$cmd = explode(' ', $body->message->text)[0];
+$arr = explode(' ', $body->message->text);
+$cmd = $arr[0];
+
+$mentioned = $arr[1] ?? null;
 
 switch ($cmd) {
     case '/try':
