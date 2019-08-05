@@ -6,6 +6,7 @@
     "ext-json": "*",
     "ext-soap": "*",
     "php": ">=7.2",
-    "guzzlehttp/guzzle": "^6.3"
+    "guzzlehttp/guzzle": "^6.3",
+    "simple-html-dom/simple-html-dom": "*"
   }
 }

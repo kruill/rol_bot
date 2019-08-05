@@ -4,6 +4,7 @@
 use GuzzleHttp\Client;
 
 require '../vendor/autoload.php';
+require_once '../vendor/simple-html-dom/simple-html-dom/simple_html_dom.php';
 
 $client = new Client();
 define('TOKEN', '711874680:AAGjVbWznVJOoV-3PpTDnxC-IbqaXRICb9Y');
@@ -25,72 +26,85 @@ function primeCheck($number) {
     return 1;
 }
 
-if ($body->message->text == '/roll') {
-    $rand = rand(0, 100);
-
-    $txt = '';
-
-    if ($rand == 0) {
-        $txt = 'Ебать ты лох, убил сам себя!';
-        $client->post(URL . 'sendPhoto', [
-            'json' => [
-                'chat_id' => $chat->id,
-                'photo'   => "https://memepedia.ru/wp-content/uploads/2017/04/%D0%B5%D0%B1%D0%B0%D1%82%D1%8C-%D1%82%D1%8B-%D0%BB%D0%BE%D1%85-%D0%BE%D1%80%D0%B8%D0%B3%D0%B8%D0%BD%D0%B0%D0%BB.jpg",
-            ],
-        ]);
-    }
-
-    if ($rand > 0 && $rand <= 10) {
-        $txt = 'От же дидько, сам себя решил пиздануть!';
-    }
-
-    if ($rand > 10 && $rand <= 20) {
-        $txt = 'Промах, лох!';
-    }
-
-    if ($rand > 20 && $rand <= 80) {
-        $txt = 'Думаэшь?';
-    }
-
-    if ($rand > 80 && $rand <= 90) {
-        $txt = 'Кританул, пидор!';
-    }
-
-    if ($rand > 90 && $rand <= 98) {
-        $txt = 'Кританул, обоссышь, двойной урон!';
-    }
-
-    if ($rand == 100) {
-        $txt = 'Убил к хуям, афелка!';
-    }
-
-    if ($rand == 99) {
-        $client->post(URL . 'sendPhoto', [
-            'json' => [
-                'chat_id' => $chat->id,
-                'photo'   => "https://memepedia.ru/wp-content/uploads/2017/04/%D0%B5%D0%B1%D0%B0%D1%82%D1%8C-%D1%82%D1%8B-%D0%BB%D0%BE%D1%85-%D0%BE%D1%80%D0%B8%D0%B3%D0%B8%D0%BD%D0%B0%D0%BB.jpg",
-            ],
-        ]);
-
-        $txt = 'Ебать ты лох!';
-    }
+if ($body->message->text == '/try') {
+    $body = $client->get('https://damn.ru/?name=' . $body->message->from->first_name . '&sex=m')->getBody();
+    $txt = html_entity_decode(strip_tags((string)str_get_html($body)->find('div[class=damn]')[0]));
 
     $client->post(URL . 'sendMessage', [
         'json' => [
             'chat_id'             => $chat->id,
-            'text'                => "{$rand} {$txt}",
+            'text'                => $txt,
             'reply_to_message_id' => $body->message->message_id,
         ],
     ]);
 } else {
-    if ($body->message->from->first_name == 'Гримлий') {
+    if ($body->message->text == '/roll') {
+        $rand = rand(0, 100);
+
+        $txt = '';
+
+        if ($rand == 0) {
+            $txt = 'Ебать ты лох, убил сам себя!';
+            $client->post(URL . 'sendPhoto', [
+                'json' => [
+                    'chat_id' => $chat->id,
+                    'photo'   => "https://memepedia.ru/wp-content/uploads/2017/04/%D0%B5%D0%B1%D0%B0%D1%82%D1%8C-%D1%82%D1%8B-%D0%BB%D0%BE%D1%85-%D0%BE%D1%80%D0%B8%D0%B3%D0%B8%D0%BD%D0%B0%D0%BB.jpg",
+                ],
+            ]);
+        }
+
+        if ($rand > 0 && $rand <= 10) {
+            $txt = 'От же дидько, сам себя решил пиздануть!';
+        }
+
+        if ($rand > 10 && $rand <= 20) {
+            $txt = 'Промах, лох!';
+        }
+
+        if ($rand > 20 && $rand <= 80) {
+            $txt = 'Думаэшь?';
+        }
+
+        if ($rand > 80 && $rand <= 90) {
+            $txt = 'Кританул, пидор!';
+        }
+
+        if ($rand > 90 && $rand <= 98) {
+            $txt = 'Кританул, обоссышь, двойной урон!';
+        }
+
+        if ($rand == 100) {
+            $txt = 'Убил к хуям, афелка!';
+        }
+
+        if ($rand == 99) {
+            $client->post(URL . 'sendPhoto', [
+                'json' => [
+                    'chat_id' => $chat->id,
+                    'photo'   => "https://memepedia.ru/wp-content/uploads/2017/04/%D0%B5%D0%B1%D0%B0%D1%82%D1%8C-%D1%82%D1%8B-%D0%BB%D0%BE%D1%85-%D0%BE%D1%80%D0%B8%D0%B3%D0%B8%D0%BD%D0%B0%D0%BB.jpg",
+                ],
+            ]);
+
+            $txt = 'Ебать ты лох!';
+        }
+
         $client->post(URL . 'sendMessage', [
             'json' => [
                 'chat_id'             => $chat->id,
-                'text'                => 'Завали ебало!',
+                'text'                => "{$rand} {$txt}",
                 'reply_to_message_id' => $body->message->message_id,
             ],
         ]);
+    } else {
+//    if ($body->message->from->first_name == 'Гримлий') {
+//        $client->post(URL . 'sendMessage', [
+//            'json' => [
+//                'chat_id'             => $chat->id,
+//                'text'                => 'Завали ебало!',
+//                'reply_to_message_id' => $body->message->message_id,
+//            ],
+//        ]);
+//    }
     }
 }
 
