@@ -25,7 +25,7 @@ function primeCheck($number) {
     return 1;
 }
 
-if ($chat->message->text == '/roll') {
+if ($body->message->text == '/roll') {
     $rand = rand(0, 100);
 
     $txt = '';
@@ -44,7 +44,7 @@ if ($chat->message->text == '/roll') {
         ],
     ]);
 } else {
-    if ($chat->message->from->first_name == 'Гримлий') {
+    if ($body->message->from->first_name == 'Гримлий') {
         $client->post(URL . 'sendMessage', [
             'json' => [
                 'chat_id' => $chat->id,
