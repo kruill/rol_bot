@@ -9,11 +9,11 @@ $client = new Client();
 define('TOKEN', '711874680:AAGjVbWznVJOoV-3PpTDnxC-IbqaXRICb9Y');
 define('URL', 'https://api.telegram.org/bot' . TOKEN . '/');
 
-$body = $client->post(URL . 'setWebhook', [
-    'multipart' => [
-        'name'     => 'certificate',
-        'contents' => file_get_contents(''),
-    ],
-])->getBody();
+$body = json_decode(file_get_contents('php://input'));
+$chat = $body->message->chat;
 
-syslog(LOG_ERR, print_r($body, true));
+$client->post(URL . 'sendMessage', [
+    'chat_id' => $chat->id,
+    'text'    => rand(0, 100),
+]);
+
