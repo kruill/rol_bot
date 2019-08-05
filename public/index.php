@@ -2,9 +2,8 @@
 
 use GuzzleHttp\Client;
 
-chroot(dirname(__DIR__));
-require 'vendor/autoload.php';
-require_once 'vendor/simple-html-dom/simple-html-dom/simple_html_dom.php';
+require '../vendor/autoload.php';
+require_once '../vendor/simple-html-dom/simple-html-dom/simple_html_dom.php';
 
 $client = new Client();
 define('TOKEN', '711874680:AAGjVbWznVJOoV-3PpTDnxC-IbqaXRICb9Y');
