@@ -14,18 +14,8 @@ $body = json_decode(file_get_contents('php://input'));
 $chat = $body->message->chat;
 
 $mentioned = null;
-if (is_array($body->message->entities)) {
+if (isset($body->message->entities) && is_array($body->message->entities)) {
     $mentioned = $body->message->entities[0]->user->first_name ?? '';
-}
-
-if ($body->message->text == 'asd') {
-    $client->post(URL . 'sendMessage', [
-        'json' => [
-            'chat_id'             => $chat->id,
-            'text'                => $body,
-            'reply_to_message_id' => $body->message->message_id,
-        ],
-    ]);
 }
 
 $get_damn = function (string $name) use ($client) {
@@ -34,7 +24,7 @@ $get_damn = function (string $name) use ($client) {
     return html_entity_decode(strip_tags((string)str_get_html($body)->find('div[class=damn]')[0]));
 };
 
-if (strpos($body->message->text, '/try')) {
+if (strpos($body->message->text, '/try') >= 0) {
     $user = $body->message->from->first_name;
     if ($mentioned) {
         $user = $mentioned;
@@ -48,7 +38,7 @@ if (strpos($body->message->text, '/try')) {
         ],
     ]);
 } else {
-    if (strpos($body->message->text, '/roll') > 0) {
+    if (strpos($body->message->text, '/roll') >= 0) {
         $rand = rand(0, 100);
         $txt = '';
 
