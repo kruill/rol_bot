@@ -13,6 +13,11 @@ define('URL', 'https://api.telegram.org/bot' . TOKEN . '/');
 $body = json_decode(file_get_contents('php://input'));
 $chat = $body->message->chat;
 
+$mentioned = null;
+if (is_array($body->message->entities)) {
+    $mentioned = $body->message->entities[0]->user->first_name ?? '';
+}
+
 if ($body->message->text == 'asd') {
     $client->post(URL . 'sendMessage', [
         'json' => [
@@ -30,7 +35,6 @@ $get_damn = function (string $name) use ($client) {
 };
 
 if (strpos($body->message->text, '/try')) {
-    $mentioned = $body->message->entities[0]->user->first_name ?? '';
     $user = $body->message->from->first_name;
     if ($mentioned) {
         $user = $mentioned;
@@ -48,7 +52,6 @@ if (strpos($body->message->text, '/try')) {
         $rand = rand(0, 100);
         $txt = '';
 
-        $mentioned = $body->message->entities[0]->user->first_name ?? '';
         $user = $body->message->from->first_name;
         if ($mentioned) {
             $user = $mentioned;
