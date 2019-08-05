@@ -44,7 +44,7 @@ if (strpos($body->message->text, '/try')) {
         ],
     ]);
 } else {
-    if ($body->message->text == '/roll') {
+    if (strpos($body->message->text, '/roll') > 0) {
         $rand = rand(0, 100);
         $txt = '';
 
