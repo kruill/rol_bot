@@ -37,6 +37,14 @@ if ($body->message->text == '/roll') {
         $txt = 'Простое число, всех уебал, бежим!';
     }
 
+    if ($rand == 0) {
+        $txt = 'Тобi пiзда, тiкай з хаты!';
+    }
+
+    if ($rand == 100) {
+        $txt = 'Ахуел?';
+    }
+
     $client->post(URL . 'sendMessage', [
         'json' => [
             'chat_id' => $chat->id,
