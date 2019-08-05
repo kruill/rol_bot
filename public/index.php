@@ -24,7 +24,7 @@ $get_damn = function (string $name) use ($client) {
     return html_entity_decode(strip_tags((string)str_get_html($body)->find('div[class=damn]')[0]));
 };
 
-if (strpos($body->message->text, '/try') >= 0) {
+if (strpos($body->message->text, '/try') != "") {
     $user = $body->message->from->first_name;
     if ($mentioned) {
         $user = $mentioned;
@@ -38,7 +38,7 @@ if (strpos($body->message->text, '/try') >= 0) {
         ],
     ]);
 } else {
-    if (strpos($body->message->text, '/roll') >= 0) {
+    if (strpos($body->message->text, '/roll') != "") {
         $rand = rand(0, 100);
         $txt = '';
 
