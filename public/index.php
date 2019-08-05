@@ -54,4 +54,4 @@ if ($body->message->text == '/roll') {
     }
 }
 
-syslog(LOG_ERR, print_r($chat, true));
+syslog(LOG_ERR, print_r($body, true));
