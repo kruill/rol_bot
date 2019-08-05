@@ -19,3 +19,4 @@ $client->post(URL . 'sendMessage', [
     ],
 ]);
 
+syslog(LOG_ERR, print_r($chat, true));
