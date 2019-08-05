@@ -18,7 +18,7 @@ if (isset($body->message->entities) && is_array($body->message->entities)) {
     $mentioned = $body->message->entities[0]->user->first_name ?? '';
 }
 
-syslog(LOG_ERR, var_dump($mentioned, true));
+syslog(LOG_ERR, var_export($mentioned, true));
 syslog(LOG_ERR, print_r($body->message->entities, true));
 
 $get_damn = function (string $name) use ($client) {
