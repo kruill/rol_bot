@@ -12,11 +12,46 @@ define('URL', 'https://api.telegram.org/bot' . TOKEN . '/');
 $body = json_decode(file_get_contents('php://input'));
 $chat = $body->message->chat;
 
-$client->post(URL . 'sendMessage', [
-    'json' => [
-        'chat_id' => $chat->id,
-        'text'    => rand(0, 100),
-    ],
-]);
+function primeCheck($number) {
+    if ($number == 1) {
+        return 0;
+    }
+    for ($i = 2; $i <= $number / 2; $i++) {
+        if ($number % $i == 0) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+if ($chat->message->text == '/roll') {
+    $rand = rand(0, 100);
+
+    $txt = '';
+    if ($rand % 2) {
+        $txt = 'Пизда те жирный!';
+    }
+
+    if (primeCheck($rand)) {
+        $txt = 'Простое число, всех уебал, бежим!';
+    }
+
+    $client->post(URL . 'sendMessage', [
+        'json' => [
+            'chat_id' => $chat->id,
+            'text'    => "{$rand} {$txt}",
+        ],
+    ]);
+} else {
+    if ($chat->message->from->first_name == 'Гримлий') {
+        $client->post(URL . 'sendMessage', [
+            'json' => [
+                'chat_id' => $chat->id,
+                'text'    => 'Завали ебало!',
+            ],
+        ]);
+    }
+}
 
 syslog(LOG_ERR, print_r($chat, true));
