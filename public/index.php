@@ -80,7 +80,7 @@ switch ($cmd) {
         $client->post(URL . 'sendMessage', [
             'json' => [
                 'chat_id'             => $chat->id,
-                'text'                => "{$rand} {$txt}",
+                'text'                => "Ролл - {$rand}. {$txt}",
                 'reply_to_message_id' => $body->message->message_id,
             ],
         ]);
