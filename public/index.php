@@ -1,10 +1,10 @@
 <?php
 
-//chroot(dirname(__DIR__));
 use GuzzleHttp\Client;
 
-require '../vendor/autoload.php';
-require_once '../vendor/simple-html-dom/simple-html-dom/simple_html_dom.php';
+chroot(dirname(__DIR__));
+require 'vendor/autoload.php';
+require_once 'vendor/simple-html-dom/simple-html-dom/simple_html_dom.php';
 
 $client = new Client();
 define('TOKEN', '711874680:AAGjVbWznVJOoV-3PpTDnxC-IbqaXRICb9Y');
@@ -17,6 +17,9 @@ $mentioned = null;
 if (isset($body->message->entities) && is_array($body->message->entities)) {
     $mentioned = $body->message->entities[0]->user->first_name ?? '';
 }
+
+syslog(LOG_ERR, $mentioned);
+syslog(LOG_ERR, $body->message->entities);
 
 $get_damn = function (string $name) use ($client) {
     $body = $client->get('https://damn.ru/?name=' . $name . '&sex=m')->getBody();
