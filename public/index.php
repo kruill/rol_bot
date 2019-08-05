@@ -23,22 +23,25 @@ $get_damn = function (string $name) use ($client) {
 
     return html_entity_decode(strip_tags((string)str_get_html($body)->find('div[class=damn]')[0]));
 };
+$cmd = explode(' ', $body->message->text)[0];
 
-if (strpos($body->message->text, '/try') != "") {
-    $user = $body->message->from->first_name;
-    if ($mentioned) {
-        $user = $mentioned;
-    }
+switch ($cmd) {
+    case '/try':
+        $user = $body->message->from->first_name;
+        if ($mentioned) {
+            $user = $mentioned;
+        }
 
-    $client->post(URL . 'sendMessage', [
-        'json' => [
-            'chat_id'             => $chat->id,
-            'text'                => $get_damn($user),
-            'reply_to_message_id' => $body->message->message_id,
-        ],
-    ]);
-} else {
-    if (strpos($body->message->text, '/roll') != "") {
+        $client->post(URL . 'sendMessage', [
+            'json' => [
+                'chat_id'             => $chat->id,
+                'text'                => $get_damn($user),
+                'reply_to_message_id' => $body->message->message_id,
+            ],
+        ]);
+        break;
+
+    case '/roll':
         $rand = rand(0, 100);
         $txt = '';
 
@@ -81,17 +84,16 @@ if (strpos($body->message->text, '/try') != "") {
                 'reply_to_message_id' => $body->message->message_id,
             ],
         ]);
-    } else {
-//    if ($body->message->from->first_name == 'Гримлий') {
-//        $client->post(URL . 'sendMessage', [
+        break;
+
+    default:
+        //        $client->post(URL . 'sendMessage', [
 //            'json' => [
 //                'chat_id'             => $chat->id,
 //                'text'                => 'Завали ебало!',
 //                'reply_to_message_id' => $body->message->message_id,
 //            ],
 //        ]);
-//    }
-    }
 }
 
 syslog(LOG_ERR, print_r($body, true));
