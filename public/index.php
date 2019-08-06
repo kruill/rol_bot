@@ -45,7 +45,7 @@ switch ($cmd) {
         $txt = html_entity_decode(
             strip_tags(
                 (string)str_get_html(
-                    $client->get(' https://citaty.info/ajax/random_quote/0/0/0/0')->getBody()
+                    $client->get('https://citaty.info/ajax/random_quote/0/0/0/0')->getBody()
                 )->find('.last')
             )
         );
