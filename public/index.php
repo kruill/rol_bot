@@ -23,6 +23,42 @@ $cmd = $arr[0];
 $mentioned = $arr[1] ?? null;
 
 switch ($cmd) {
+    case '/joke':
+        $txt = html_entity_decode(
+            strip_tags(
+                (string)str_get_html(
+                    $client->get('https://baneks.ru/random')->getBody()
+                )->find('section.anek-view > article > p')
+            )
+        );
+
+        $client->post(URL . 'sendMessage', [
+            'json' => [
+                'chat_id' => $chat->id,
+                'text'    => "Анекдот от Гримлия\n\n" . $txt,
+            ],
+        ]);
+
+        break;
+
+    case '/quote':
+        $txt = html_entity_decode(
+            strip_tags(
+                (string)str_get_html(
+                    $client->get(' https://citaty.info/ajax/random_quote/0/0/0/0')->getBody()
+                )->find('.last')
+            )
+        );
+
+        $client->post(URL . 'sendMessage', [
+            'json' => [
+                'chat_id' => $chat->id,
+                'text'    => "Цитата от Гримлия\n\n" . $txt,
+            ],
+        ]);
+
+        break;
+
     case '/try':
         $user = $body->message->from->first_name;
         if ($mentioned) {
