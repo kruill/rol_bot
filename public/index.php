@@ -139,6 +139,16 @@ switch ($cmd) {
                 ],
             ]);
         }
+
+        if (in_array(trim($body->message->text), ['пидар', 'пидор', 'чмо', 'гандон', 'гондон'])) {
+            $client->post(URL . 'sendMessage', [
+                'json' => [
+                    'chat_id'             => $chat->id,
+                    'text'                => 'Завали ебало!',
+                    'reply_to_message_id' => $body->message->message_id,
+                ],
+            ]);
+        }
 }
 
 syslog(LOG_ERR, print_r($body, true));
