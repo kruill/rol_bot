@@ -28,7 +28,7 @@ switch ($cmd) {
             strip_tags(
                 (string)str_get_html(
                     $client->get('https://baneks.ru/random')->getBody()
-                )->find('section.anek-view > article > p')
+                )->find('section.anek-view > article > p')[0]
             )
         );
 
@@ -46,7 +46,7 @@ switch ($cmd) {
             strip_tags(
                 (string)str_get_html(
                     $client->get('https://citaty.info/ajax/random_quote/0/0/0/0')->getBody()
-                )->find('.last')
+                )->find('.last')[0]
             )
         );
 
