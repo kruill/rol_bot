@@ -22,6 +22,16 @@ $cmd = $arr[0];
 
 $mentioned = $arr[1] ?? null;
 
+if ($body->message->text == 'Что ты знаешь о Гримлеге?') {
+    $client->post(URL . 'sendMessage', [
+        'json' => [
+            'chat_id'             => $chat->id,
+            'text'                => "Обычно он сосет хуй по пятницам в подворотне!",
+            'reply_to_message_id' => $body->message->message_id,
+        ],
+    ]);
+}
+
 switch ($cmd) {
     case '/joke':
         $txt = html_entity_decode(
