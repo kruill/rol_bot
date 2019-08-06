@@ -130,13 +130,15 @@ switch ($cmd) {
         break;
 
     default:
-        //        $client->post(URL . 'sendMessage', [
-//            'json' => [
-//                'chat_id'             => $chat->id,
-//                'text'                => 'Завали ебало!',
-//                'reply_to_message_id' => $body->message->message_id,
-//            ],
-//        ]);
+        if ($body->message->from->first_name == 'Гримлий' && isset($body->message->sticker)) {
+            $client->post(URL . 'sendMessage', [
+                'json' => [
+                    'chat_id'             => $chat->id,
+                    'text'                => 'Завали ебало!',
+                    'reply_to_message_id' => $body->message->message_id,
+                ],
+            ]);
+        }
 }
 
 syslog(LOG_ERR, print_r($body, true));
