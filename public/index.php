@@ -130,14 +130,26 @@ switch ($cmd) {
         break;
 
     default:
-        if ($body->message->from->first_name == 'Гримлий' && isset($body->message->sticker)) {
-            $client->post(URL . 'sendMessage', [
-                'json' => [
-                    'chat_id'             => $chat->id,
-                    'text'                => 'Завали ебало!',
-                    'reply_to_message_id' => $body->message->message_id,
-                ],
-            ]);
+        if ($body->message->from->first_name == 'Гримлий') {
+            if (isset($body->message->sticker)) {
+                $client->post(URL . 'sendMessage', [
+                    'json' => [
+                        'chat_id'             => $chat->id,
+                        'text'                => 'Завали ебало!',
+                        'reply_to_message_id' => $body->message->message_id,
+                    ],
+                ]);
+            }
+
+            if ($body->message->text == 'я котик' || $body->message->text == 'Я котик') {
+                $client->post(URL . 'sendMessage', [
+                    'json' => [
+                        'chat_id'             => $chat->id,
+                        'text'                => time() % 2 ? 'Пидор ты, а не котик!' : 'Чмо ты, а не котик, лох!',
+                        'reply_to_message_id' => $body->message->message_id,
+                    ],
+                ]);
+            }
         }
 
         if (in_array(trim($body->message->text), ['пидар', 'пидор', 'чмо', 'гандон', 'гондон'])) {
