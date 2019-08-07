@@ -69,7 +69,7 @@ switch ($cmd) {
 
         break;
 
-    case '/try':
+    case '/whois':
         $user = $body->message->from->first_name;
         if ($mentioned) {
             $user = $mentioned;
