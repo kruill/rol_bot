@@ -161,6 +161,96 @@ switch ($cmd) {
                 ],
             ]);
         }
+        
+         if (in_array(trim($body->message->text), ['Ну', 'А'])) {
+            $client->post(URL . 'sendMessage', [
+                'json' => [
+                    'chat_id'             => $chat->id,
+                    'text'                => 'По лбу хуйну!',
+                    'reply_to_message_id' => $body->message->message_id,
+                ],
+            ]);
+        }
+        
+        if (in_array(trim($body->message->text), [')', '))', ')))', ':)', ':))', ':)))'])) {
+            $client->post(URL . 'sendMessage', [
+                'json' => [
+                    'chat_id'             => $chat->id,
+                    'text'                => 'В жопу себе свой смайлик засунь!',
+                    'reply_to_message_id' => $body->message->message_id,
+                ],
+            ]);
+        }
+        
+        if (in_array(trim($body->message->text), ['))))', ')))))', '))))))'])) {
+            $client->post(URL . 'sendMessage', [
+                'json' => [
+                    'chat_id'             => $chat->id,
+                    'text'                => 'Больше смайликов ставь, пидрила!',
+                    'reply_to_message_id' => $body->message->message_id,
+                ],
+            ]);
+        }
+        
+        if (in_array(trim($body->message->text), ['Не'])) {
+            $client->post(URL . 'sendMessage', [
+                'json' => [
+                    'chat_id'             => $chat->id,
+                    'text'                => 'Ебало в говне!',
+                    'reply_to_message_id' => $body->message->message_id,
+                ],
+            ]);
+        }
+        
+        if (in_array(trim($body->message->text), ['Так'])) {
+            $client->post(URL . 'sendMessage', [
+                'json' => [
+                    'chat_id'             => $chat->id,
+                    'text'                => 'Пиши все сразу, мудак!',
+                    'reply_to_message_id' => $body->message->message_id,
+                ],
+            ]);
+        }
+        
+        if (in_array(trim($body->message->text), ['Так'])) {
+            $client->post(URL . 'sendMessage', [
+                'json' => [
+                    'chat_id'             => $chat->id,
+                    'text'                => 'Пиши все сразу, мудак!',
+                    'reply_to_message_id' => $body->message->message_id,
+                ],
+            ]);
+        }
+        
+        if (in_array(trim($body->message->text), ['кароче'])) {
+            $client->post(URL . 'sendMessage', [
+                'json' => [
+                    'chat_id'             => $chat->id,
+                    'text'                => 'Иди букварь учи, дрочер!',
+                    'reply_to_message_id' => $body->message->message_id,
+                ],
+            ]);
+        }
+        
+        if (in_array(trim($body->message->text), ['ух'])) {
+            $client->post(URL . 'sendMessage', [
+                'json' => [
+                    'chat_id'             => $chat->id,
+                    'text'                => 'Ну здравствуй, петух!',
+                    'reply_to_message_id' => $body->message->message_id,
+                ],
+            ]);
+        }
+        
+        if (in_array(trim($body->message->text), ['я котик'])) {
+            $client->post(URL . 'sendMessage', [
+                'json' => [
+                    'chat_id'             => $chat->id,
+                    'text'                => 'Ебать тебя в ротик!',
+                    'reply_to_message_id' => $body->message->message_id,
+                ],
+            ]);
+        }
 }
 
 syslog(LOG_ERR, print_r($body, true));
