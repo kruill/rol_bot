@@ -212,11 +212,11 @@ switch ($cmd) {
             ]);
         }
         
-        if (in_array(trim($body->message->text), ['Так'])) {
+        if (in_array(trim($body->message->text), ['алёёё'])) {
             $client->post(URL . 'sendMessage', [
                 'json' => [
                     'chat_id'             => $chat->id,
-                    'text'                => 'Пиши все сразу, мудак!',
+                    'text'                => 'Ну и мудак же ты!',
                     'reply_to_message_id' => $body->message->message_id,
                 ],
             ]);
