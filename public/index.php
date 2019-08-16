@@ -21,7 +21,7 @@ $arr = explode(' ', $body->message->text);
 $cmd = $arr[0];
 
 $mentioned = $arr[1] ?? null;
-$body->message->text = strtolower($body->message->text);
+$body->message->text = mb_strtolower($body->message->text);
 
 if ($body->message->text == 'что ты знаешь о гримлеге?') {
     $client->post(URL . 'sendMessage', [
