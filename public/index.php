@@ -21,8 +21,9 @@ $arr = explode(' ', $body->message->text);
 $cmd = $arr[0];
 
 $mentioned = $arr[1] ?? null;
+$body->message->text = strtolower($body->message->text);
 
-if ($body->message->text == 'Что ты знаешь о Гримлеге?') {
+if ($body->message->text == 'что ты знаешь о гримлеге?') {
     $client->post(URL . 'sendMessage', [
         'json' => [
             'chat_id'             => $chat->id,
@@ -162,7 +163,7 @@ switch ($cmd) {
             ]);
         }
         
-         if (in_array(trim($body->message->text), ['Ну', 'А'])) {
+         if (in_array(trim($body->message->text), ['ну', 'а'])) {
             $client->post(URL . 'sendMessage', [
                 'json' => [
                     'chat_id'             => $chat->id,
@@ -192,7 +193,7 @@ switch ($cmd) {
             ]);
         }
         
-        if (in_array(trim($body->message->text), ['Не'])) {
+        if (in_array(trim($body->message->text), ['не'])) {
             $client->post(URL . 'sendMessage', [
                 'json' => [
                     'chat_id'             => $chat->id,
@@ -202,7 +203,7 @@ switch ($cmd) {
             ]);
         }
         
-        if (in_array(trim($body->message->text), ['Так'])) {
+        if (in_array(trim($body->message->text), ['так'])) {
             $client->post(URL . 'sendMessage', [
                 'json' => [
                     'chat_id'             => $chat->id,
